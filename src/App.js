@@ -10,52 +10,59 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const actions = ['-1', '+1', '+100', '-100', 'reset'];
 
 export class App extends Component{
-  constructor(props) {
-    super(props);
-  }
   state = {
   number: 0,
-    enteredNum: 0
+    enteredNum: '',
+      redFlag: false
 };
-
 
 
 onButton = (event)=>{
   const action = event.target.value;
-  if (action === 'reset') {
-    this.setState({number: 0})
-  }
-  this.addition(action)
+  action === 'reset'
+      ? this.setState({
+          number: 0,
+          enteredNum: '',
+      })
+      : this.addition(action)
 };
 
+//Додавання
 addition = (action)=>{
   if (this.state.number + +action >= 0){
   this.setState({
     number: this.state.number + +action
   })
-}else return null
+  }else return null
 };
 
+//запис із інпута
 handleChange = (event)=>{
-    this.setState({enteredNum: +event.target.value});
-    console.log(this.state.enteredNum);
+    this.setState({enteredNum: event.target.value});
   };
 
+// Робота кнопки надіслати
 onSend = (event)=>{
   event.preventDefault();
-  this.addition(this.state.enteredNum)
-};
+ let a = this.addition(this.state.enteredNum);
+     a === null
+        ? this.setState({redFlag: true})
+        : this.setState({
+            redFlag: false,
+            enteredNum: ''
+        })
+    };
 
 
   render() {
-    const {number} = this.state;
+    const {number, redFlag, enteredNum} = this.state;
     return (
-     <div className='counter card'>
-       <div className='number'><h1>{number}</h1></div>
-       <Buttons actions={actions} onBtn={this.onButton} />
-       <div>
-        <Form handler={this.handleChange} operator={this.onSend}/>
-       </div>
+         <div className='counter card'>
+             <div className='number'><h1>{number}</h1></div>
+             <Buttons actions={actions} onBtn={this.onButton} />
+             <div>
+                 <Form handler={this.handleChange} operator={this.onSend} flag={redFlag} entered={enteredNum}/>
+             </div>
      </div>
     )
   }
