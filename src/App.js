@@ -2,13 +2,12 @@ import React, {Component} from 'react';
 import {Form} from "./componets/form";
 import {Buttons} from './componets/buttons';
 import './App.css';
-//Вся стилізація на бутстрапі
+//Вся стилізація на бутстрапі  npm install react-bootstrap bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 //массив дій
 const actions = ['-1', '+1', '+100', '-100', 'reset'];
-
 
 export class App extends Component{
   constructor(props) {
@@ -60,9 +59,6 @@ onSend = (event)=>{
      </div>
     )
   }
-
-
-
 
 }
 
