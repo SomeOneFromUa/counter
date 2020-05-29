@@ -1,0 +1,10 @@
+.counter {
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    padding: 10px;
+}
+.number {
+    align-self: center;
+}
